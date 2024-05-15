@@ -1,0 +1,17 @@
+{
+    "TITLE": "Test Documentation",
+    "SECTIONS": [
+        {
+            "TITLE": "System Overview",
+            "FREETEXT": "This documentation is used to test the script",
+            "REQUIREMENTS": [
+                {
+                    "UID": "TEST-01",
+                    "TITLE": "Test the script",
+                    "STATEMENT": "This is a Test",
+                    "RATIONALE": "This is a test"
+                }
+            ]
+        }
+    ]
+}
