@@ -28,10 +28,6 @@ def json_to_sdoc(json_data):
                     sdoc_content += f"UID: {requirement['UID']}\n"
                 if "TITLE" in requirement:
                     sdoc_content += f"TITLE: {requirement['TITLE']}\n"
-                if "REFS" in requirement:
-                    sdoc_content += "REFS:\n"
-                    for ref in requirement["REFS"]:
-                        sdoc_content += f"- TYPE: {ref['TYPE']}\n  VALUE: {ref['VALUE']}\n"
                 if "STATEMENT" in requirement:
                     sdoc_content += "STATEMENT: >>>\n"
                     sdoc_content += f"{requirement['STATEMENT']}\n"
@@ -40,6 +36,10 @@ def json_to_sdoc(json_data):
                     sdoc_content += "RATIONALE: >>>\n"
                     sdoc_content += f"{requirement['RATIONALE']}\n"
                     sdoc_content += "<<<\n"
+                if "RELATIONS" in requirement:
+                    sdoc_content += "RELATIONS:\n"
+                    for relation in requirement["RELATIONS"]:
+                        sdoc_content += f"- TYPE: {relation['TYPE']}\n  VALUE: {relation['VALUE']}\n"
             
             sdoc_content += "\n[/SECTION]\n"
 
