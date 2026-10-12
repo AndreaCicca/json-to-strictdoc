@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "json-to-strictdoc"
 version = "1.0.0"
-description = "Feature-complete bidirectional parser, validator, and converter between JSON and StrictDoc (.sdoc / .sgra)."
+description = "Bidirectional converter and parser between JSON and StrictDoc (.sdoc / .sgra)."
 readme = "README.MD"
 license = "MIT"
 license-files = ["LICENSE"]
