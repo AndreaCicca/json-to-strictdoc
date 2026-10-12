@@ -1,67 +1,99 @@
-import json
-import argparse
+#!/usr/bin/env python3
+"""
+Entrypoint for StrictDoc <-> JSON bidirectional parser and converter.
+Exposes the full `strictdoc_parser` API (`json_to_sdoc`, `sdoc_to_json`, `parse_sdoc`,
+`parse_sgra`, `SDocValidator`, etc.) and runs the CLI when executed directly.
+"""
 
-def json_to_sdoc(json_data):
-    # Carica il JSON
-    data = json.loads(json_data)
-    
-    # Inizia a costruire il contenuto del file .sdoc
-    sdoc_content = "[DOCUMENT]\n"
-    if "TITLE" in data:
-        sdoc_content += f"TITLE: {data['TITLE']}\n"
-    
-    sdoc_content += "\n[FREETEXT]\nThis requirements specification will illustrate the functionalities of the HTR System of the Isolette Project.\n[/FREETEXT]\n"
+from __future__ import annotations
 
-    # Aggiungi le sezioni e i requisiti
-    if "SECTIONS" in data:
-        for section in data["SECTIONS"]:
-            sdoc_content += "\n[SECTION]\n"
-            if "TITLE" in section:
-                sdoc_content += f"TITLE: {section['TITLE']}\n"
+import sys
 
-            if "FREETEXT" in section:
-                sdoc_content += f"\n[FREETEXT]\n{section['FREETEXT']}\n[/FREETEXT]\n"
-            
-            for requirement in section.get("REQUIREMENTS", []):
-                sdoc_content += "\n[REQUIREMENT]\n"
-                if "UID" in requirement:
-                    sdoc_content += f"UID: {requirement['UID']}\n"
-                if "TITLE" in requirement:
-                    sdoc_content += f"TITLE: {requirement['TITLE']}\n"
-                if "STATEMENT" in requirement:
-                    sdoc_content += "STATEMENT: >>>\n"
-                    sdoc_content += f"{requirement['STATEMENT']}\n"
-                    sdoc_content += "<<<\n"
-                if "RATIONALE" in requirement:
-                    sdoc_content += "RATIONALE: >>>\n"
-                    sdoc_content += f"{requirement['RATIONALE']}\n"
-                    sdoc_content += "<<<\n"
-                if "RELATIONS" in requirement:
-                    sdoc_content += "RELATIONS:\n"
-                    for relation in requirement["RELATIONS"]:
-                        sdoc_content += f"- TYPE: {relation['TYPE']}\n  VALUE: {relation['VALUE']}\n"
-            
-            sdoc_content += "\n[/SECTION]\n"
+from strictdoc_parser import (
+    Anchor,
+    ChildReqReference,
+    DocumentConfig,
+    DocumentFromFile,
+    DocumentGrammar,
+    DocumentOptions,
+    FileReference,
+    GrammarElement,
+    GrammarElementField,
+    GrammarElementRelation,
+    InlineLink,
+    ParentReqReference,
+    Reference,
+    SDocDocument,
+    SDocElement,
+    SDocNode,
+    SDocNodeField,
+    SDocParser,
+    SDocSyntaxError,
+    SDocValidationError,
+    SDocValidator,
+    SDocWriter,
+    ViewElement,
+    ViewElementField,
+    ViewElementTags,
+    create_default_grammar,
+    dict_to_grammar,
+    dict_to_sdoc,
+    json_to_sdoc,
+    json_to_sdoc_document,
+    json_to_sgra,
+    parse_sdoc,
+    parse_sgra,
+    sdoc_document_to_json,
+    sdoc_to_dict,
+    sdoc_to_json,
+    sgra_to_json,
+    write_sdoc,
+    write_sgra,
+)
+from strictdoc_parser.cli import main
 
-    return sdoc_content
-
-def main():
-    parser = argparse.ArgumentParser(description="Convert JSON to SDOC format.")
-    parser.add_argument("json_file", help="Path to the input JSON file")
-    parser.add_argument("sdoc_file", help="Path to the output SDOC file")
-
-    args = parser.parse_args()
-
-    # Leggi il file JSON
-    with open(args.json_file, 'r', encoding='utf-8') as file:
-        json_data = file.read()
-
-    # Converti il JSON in formato SDOC
-    sdoc_output = json_to_sdoc(json_data)
-
-    # Scrivi l'output nel file SDOC
-    with open(args.sdoc_file, 'w', encoding='utf-8') as file:
-        file.write(sdoc_output)
+__all__ = [
+    "Anchor",
+    "ChildReqReference",
+    "DocumentConfig",
+    "DocumentFromFile",
+    "DocumentGrammar",
+    "DocumentOptions",
+    "FileReference",
+    "GrammarElement",
+    "GrammarElementField",
+    "GrammarElementRelation",
+    "InlineLink",
+    "ParentReqReference",
+    "Reference",
+    "SDocDocument",
+    "SDocElement",
+    "SDocNode",
+    "SDocNodeField",
+    "SDocParser",
+    "SDocSyntaxError",
+    "SDocValidationError",
+    "SDocValidator",
+    "SDocWriter",
+    "ViewElement",
+    "ViewElementField",
+    "ViewElementTags",
+    "create_default_grammar",
+    "dict_to_grammar",
+    "dict_to_sdoc",
+    "json_to_sdoc",
+    "json_to_sdoc_document",
+    "json_to_sgra",
+    "main",
+    "parse_sdoc",
+    "parse_sgra",
+    "sdoc_document_to_json",
+    "sdoc_to_dict",
+    "sdoc_to_json",
+    "sgra_to_json",
+    "write_sdoc",
+    "write_sgra",
+]
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

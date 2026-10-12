@@ -1,16 +1,13 @@
 [DOCUMENT]
 TITLE: Test Documentation
 
-[FREETEXT]
-This requirements specification will illustrate the functionalities of the HTR System of the Isolette Project.
-[/FREETEXT]
-
-[SECTION]
+[[SECTION]]
 TITLE: System Overview
 
-[FREETEXT]
+[TEXT]
+STATEMENT: >>>
 This documentation is used to test the script
-[/FREETEXT]
+<<<
 
 [REQUIREMENT]
 UID: TEST-01
@@ -22,4 +19,4 @@ RATIONALE: >>>
 This is a test
 <<<
 
-[/SECTION]
+[[/SECTION]]
