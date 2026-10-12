@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "json-to-strictdoc"
+version = "1.0.0"
+description = "Feature-complete bidirectional parser, validator, and converter between JSON and StrictDoc (.sdoc / .sgra)."
+readme = "README.MD"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [
+    { name = "Andrea Ciccarello" }
+]
+keywords = ["strictdoc", "sdoc", "sgra", "requirements", "parser", "json", "converter"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Documentation",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Text Processing :: Markup",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/AndreaCicca/json-to-strictdoc"
+Repository = "https://github.com/AndreaCicca/json-to-strictdoc"
+Issues = "https://github.com/AndreaCicca/json-to-strictdoc/issues"
+
+[project.scripts]
+json-to-strictdoc = "strictdoc_parser.cli:main"
+strictdoc-parser = "strictdoc_parser.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["strictdoc_parser*"]
+
+[tool.setuptools.package-data]
+strictdoc_parser = ["py.typed"]
+
+[dependency-groups]
+dev = [
+    "build>=1.2.0",
+    "twine>=5.0.0",
+]
+
+
